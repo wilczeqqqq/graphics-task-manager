@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+client_one:
+  login: MyString
+  password: MyString
+  full_name: MyString
+  login_status: MyString
+
+client_two:
+  login: MyString
+  password: MyString
+  full_name: MyString
+  login_status: MyString

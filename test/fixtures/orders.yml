@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+order_one:
+  client: client_one
+  artist: artist_one
+  service: service_one
+  order_status: MyString
+
+order_two:
+  client: client_two
+  artist: artist_two
+  service: service_two
+  order_status: MyString
