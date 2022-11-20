@@ -1,0 +1,1183 @@
+FORMAT: 1A
+HOST: https://localhost:3000/
+
+# ArtGear
+
+ArtGear - Graphics Task Manager
+
+<!-- TOKEN START -->
+
+## Login [/login{?login}{?password}]
+
+### Login [POST]
+
++ Request
+    + Headers   
+            
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+    
++ Parameters
+    + login: MatejkoPL (string) - Artist's login
+    + password: Stanczyk123! (string) - Artist's password
+
++ Response 200 (application/json)
+
+        {
+            "token": "kQqci2KbktyAetKd12J4TCFa" 
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+        
+## Logout [/logout]
+
+### Logout [DELETE]
+
++ Request
+    + Headers   
+            
+            Accept: application/json
+            Authorization: [auth_token]
+
++ Response 200 (application/json)
+
+        {
+            "message": "logged out" 
+        }
+        
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+
+<!-- TOKEN END -->
+
+<!-- ARTISTS START -->
+
+## All Artists [/artists{?login}{?password}{?nickname}{?bio}{?preffered_style}]
+
+### List All Artists [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "login": "MatejkoPL",
+                "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
+                "nickname": "Matejko",
+                "bio": "Painter...",
+                "preffered_style": "Old painting"
+            }
+        ]
+        
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+
+### Create An Artist [POST]
+
++ Request
+    + Headers   
+            
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+    
++ Parameters
+    + login: MatejkoPL (string) - Artist's login
+    + password: Stanczyk123! (string) - Artist's password
+    + nickname: Matejko (string) - Artist's nickname
+    + bio: Painter... (string, optional) - Artist's bio
+    + preffered_style: Old painting (string, optional) - Artist's preffered style
+
++ Response 201 (application/json)
+
+        {
+                "id": 1,
+                "login": "MatejkoPL",
+                "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
+                "nickname": "Matejko",
+                "bio": "Painter...",
+                "preffered_style": "Old painting"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+        
+## An Artist [/artists/{id}{?login}{?password}{?nickname}{?bio}{?preffered_style}]
+
+### List An Artist [GET]
+
++ Request
+    + Headers
+        
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of an artist
+    
++ Response 200 (application/json)
+
+        {
+                "id": 1,
+                "login": "MatejkoPL",
+                "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
+                "nickname": "Matejko",
+                "bio": "Painter...",
+                "preffered_style": "Old painting"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Delete An Artist [DELETE]
+
++ Request
+    + Headers
+        
+            Accept: application/json
+            Authorization: [auth_token]
+        
++ Parameters
+    + id: 1 (integer) - ID of an artist
+    
++ Response 200 (application/json)
+
+        {
+            "success": "true"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Update An Artist [PATCH]
+
++ Request
+    + Headers
+        
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + id: 1 (integer) - ID of an artist
+    + password: Stanczyk123! (string, optional) - Artist's password
+    + nickname: Matejko (string, optional) - Artist's nickname
+    + bio: Painter... (string, optional) - Artist's bio
+    + preffered_style: Old painting (string, optional) - Artist's preffered style
+
++ Response 200 (application/json)
+
+        {
+                "id": 1,
+                "login": "MatejkoPL",
+                "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
+                "nickname": "Matejko",
+                "bio": "Painter...",
+                "preffered_style": "Old painting"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+<!-- ARTIST END -->
+
+<!-- CLIENTS START -->
+
+## All Clients [/clients{?full_name}{?email}{?phone_number}{?age}]
+
+### List All Clients [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "full_name": "Jan Kowalski",
+                "email": "jan.kowalski@gmail.com",
+                "phone_number": "587458625",
+                "age": 18,
+                "address":
+                {
+                    "id": 1,
+                    "address_line_1": "Plac Grunwaldzki",
+                    "address_line_2": "109",
+                    "postal_code": "50-379",
+                    "city":" Wroclaw",
+                    "country": "PL"
+                }
+            }
+        ]
+
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+
+### Create A Client [POST]
+
++ Request
+    + Headers   
+            
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+    
++ Parameters
+    + full_name: Jan Kowalski (string) - Client's full name
+    + email: jan.kowalski@gmail.com (string) - Client's email
+    + phone_number: 587458625 (string) - Client's phone number
+    + age: 18 (integer) - Client's age
+
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "full_name": "Jan Kowalski",
+            "email": "jan.kowalski@gmail.com",
+            "phone_number": "587458625",
+            "age": 18,
+            "address": {}
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+## A Client [/clients/{id}{?full_name}{?email}{?phone_number}{?age}]
+
+### List A Client [GET]
+
++ Request
+    + Headers
+        
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of a client
+    
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "full_name": "Jan Kowalski",
+            "email": "jan.kowalski@gmail.com",
+            "phone_number": "587458625",
+            "age": 18
+            "address":
+            {
+                "id": 1,
+                "address_line_1": "Plac Grunwaldzki",
+                "address_line_2": "109",
+                "postal_code": "50-379",
+                "city":" Wroclaw",
+                "country": "PL"
+            }
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Delete A Client [DELETE]
+
++ Request
+    + Headers
+        
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of a client
+    
++ Response 200 (application/json)
+
+        {
+            "success": "true"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Update A Client [PATCH]
+
++ Request
+    + Headers
+        
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+    
++ Parameters
+    + id: 1 (integer) - ID of a client
+    + full_name: Piotr Nowak (string, optional) - Client's full name
+    + email: piotr.nowak@gmail.com (string, optional) - Client's email
+    + phone_number: 698741258 (string, optional) - Client's phone number
+    + age: 45 (integer, optional) - Client's age
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "full_name": "Piotr Nowak",
+            "email": "piotr.nowak@gmail.com",
+            "phone_number": "698741258",
+            "age": 45
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+        
+<!-- CLIENTS END -->
+
+<!-- ADDRESSES START -->
+
+## All Addresses [/clients/{id}/addresses{?address_line_1}{?address_line_2}{?postal_code}{?city}{?country}]
+
+### List An Address [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            
++ Parameters
+  + id: 1 (integer) - ID of a client
+
++ Response 200 (application/json)
+
+        
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "address_line_1": "Plac Grunwaldzki",
+                "address_line_2": "109",
+                "postal_code": "50379",
+                "city": "Wrocław",
+                "country": "PL"
+            }
+            
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Create An Address [POST]
+
++ Request
+    + Headers   
+            
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+    
++ Parameters
+    + id: 1 (integer) - Client's ID
+    + address_line_1: Plac Grunwaldzki (string) - Client's address line number 1
+    + address_line_2: 109 (string, optional) - Client's address line number 2
+    + postal_code: 50379 (string) - Client's postal code
+    + city: Wrocław (string) - Client's city
+    + country: PL (string) - Client's country
+
++ Response 201 (application/json)
+
+        [
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "address_line_1": "Plac Grunwaldzki",
+                "address_line_2": "109",
+                "postal_code": "50379",
+                "city": "Wrocław",
+                "country": "PL"
+            }
+        ]
+        
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+        
+## An Address [/clients/{id}/addresses/{address_id}{?client_id}{?address_line_1}{?address_line_2}{?postal_code}{?city}{?country}]
+### Delete An Address [DELETE]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Authorization: [auth_token]
+        
++ Parameters
+    + address_id: 1 (integer) - ID of an address
+    + id: 1 (integer) - ID of a client
+    
++ Response 200 (application/json)
+
+        {
+            "success": "true"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Update An Address [PATCH]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + address_id: 1 (integer) - ID of an address
+    + id: 1 (integer) - ID of a client
+    + address_line_1: Plac Grunwaldzki (string, optional) - Client's address line number 1
+    + address_line_2: 109 (string, optional) - Client's address line number 2
+    + postal_code: 50379 (string, optional) - Client's postal code
+    + city: Wrocław (string, optional) - Client's city
+    + country: PL (string, optional) - Client's country
+
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "address_line_1": "Kosciuszki",
+                "address_line_2": "109",
+                "postal_code": "50370",
+                "city": "Wrocław",
+                "country": "PL"
+            }
+            
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+<!-- ADDRESSES END -->
+
+<!-- SERVICES START -->
+
+## All Services [/services{?category_id}{?name}]
+
+### List All Services [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Making a logo",
+                "category:":
+                {
+                    "id": 1,
+                    "name": "Logo"
+                }
+            }
+        ]
+        
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+
+### Create A Service [POST]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + category_id: 1 (integer) - ID of a service category
+    + name: Making a logo (string) - Service name
+
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "name": "Making a logo",
+            "category:":
+            {
+                "id": 1,
+                "name": "Logo"
+            }
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+## A Service [/services/{id}{?category_id}{?name}]
+
+### List A Service [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of a service
+    
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Making a logo",
+            "category:":
+            {
+                "id": 1,
+                "name": "Logo"
+            }
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Delete A Service [DELETE]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Authorization: [auth_token]
+        
++ Parameters
+    + id: 1 (integer) - ID of a service
+    
++ Response 200 (application/json)
+
+        {
+            "success": "true"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Update A Service [PATCH]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + id: 1 (integer) -  ID of a service
+    + category_id: 2 (integer, optional) - ID of a service category
+    + name: Making a poster (string, optional) - Service name
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Making a poster",
+            "category:":
+            {
+                "id": 2,
+                "name": "Poster"
+            }
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+        
+## Services By Category [/services/{category_id}{?name}]
+
+### List Services by Category [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+        
++ Parameters
+    + category_id: 1 (integer) - ID of a service category
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Making a logo"
+            }
+        ]
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+<!-- SERVICES END -->
+
+<!-- CATEGORIES START -->
+
+## All Categories [/categories{?name}]
+
+### List All Categories [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Logo"
+            }
+        ]
+        
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+
+### Create A Category [POST]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + name: Logo (string) - Category name
+
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "name": "Logo"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+## A Category [/categories/{id}{?name}]
+
+### List A Category [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of a category
+    
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Logo"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Delete A Category [DELETE]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Authorization: [auth_token]
+        
++ Parameters
+    + id: 1 (integer) - ID of a category
+    
++ Response 200 (application/json)
+
+        {
+            "success": "true"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Update A Category [PATCH]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + id: 1 (integer) - ID of a category
+    + name: Poster (string, optional) - Category name
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Poster"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+        
+<!-- CATEGORIES END -->
+
+<!-- ORDERS START -->
+
+## All Orders [/orders{?client_id}{?artist_id}{?service_id}{?order_status}{?notes}]
+
+### List All Orders [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "artist":
+                {
+                    "id": 1,
+                    "nickname":"Matejko",
+                    "bio:":"Painter… ",
+                    "preffered_style": "Old paintings"
+                },
+                "service":
+                {
+                    "id": 1,
+                    "name":"Making a logo",
+                    "category:":
+                    {
+                        "id": 1,
+                        "name": "Logo"
+                    }
+                },
+                "order_status": "CREATED",
+                "notes": "Contact via email"
+            }
+        ]
+        
++ Response 500 (application/json)
+
+        {
+            "message": "INTERNAL SERVER ERROR"
+        }
+
+### Create An Order [POST]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+    
++ Parameters
+    + client_id: 1 (string) - ID of a client
+    + artist_id: 1 (string) - ID of an artist
+    + service_id: 1 (string) - ID of a service
+    + notes: Contact via email (string, optional) - Notes to order
+
++ Response 201 (application/json)
+
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "artist":
+                {
+                    "id": 1,
+                    "nickname":"Matejko",
+                    "bio:":"Painter… ",
+                    "preffered_style": "Old paintings"
+                },
+                "service":
+                {
+                    "id": 1,
+                    "name":"Making a logo",
+                    "category:":
+                    {
+                        "id": 1,
+                        "name": "Logo"
+                    }
+                },
+                "order_status": "CREATED",
+                "notes": "Contact via email"
+            }
+            
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+## An Order [/orders/{id}{?order_status}]
+
+### List An Order [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of an order
+    
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "artist":
+                {
+                    "id": 1,
+                    "nickname":"Matejko",
+                    "bio:":"Painter… ",
+                    "preffered_style": "Old paintings"
+                },
+                "service":
+                {
+                    "id": 1,
+                    "name":"Making a logo",
+                    "category:":
+                    {
+                        "id": 1,
+                        "name": "Logo"
+                    }
+                },
+                "order_status": "IN_PROGRESS",
+                "notes": "Contact via email"
+            }
+            
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Delete An Order [DELETE]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of an order
+    
++ Response 200 (application/json)
+
+        {
+            "success": "true"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+### Update An Order Status [PATCH]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+    
++ Parameters
+    + id: 1 (integer) - ID of an order
+    + order_status: COMPLETED (string, optional) - Order status
+
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "artist":
+                {
+                    "id": 1,
+                    "nickname":"Matejko",
+                    "bio:":"Painter… ",
+                    "preffered_style": "Old paintings"
+                },
+                "service":
+                {
+                    "id": 1,
+                    "name":"Matejko",
+                    "category:":
+                    {
+                        "id": 1,
+                        "name": "Logo"
+                    }
+                },
+                "order_status": "COMPLETED",
+                "notes": "Contact via email"
+            }
+            
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "BAD REQUEST"
+        }
+
+## User's Orders [/orders/{user_id}]
+
+### List User's Orders [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            
++ Parameters
+    + user_id: 1 (integer) - ID of an user
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "artist":
+                {
+                    "id": 1,
+                    "nickname":"Matejko",
+                    "bio:":"Painter… ",
+                    "preffered_style": "Old paintings"
+                },
+                "service":
+                {
+                    "id": 1,
+                    "name":"Matejko",
+                    "category:":
+                    {
+                        "id": 1,
+                        "name": "Logo"
+                    }
+                },
+                "order_status": "CREATED",
+                "notes": "Contact via email"
+            }
+        ]
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+## Artist's Orders [/orders/{artist_id}]
+
+### List Artist's Orders [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            
++ Parameters
+    + artist_id: 1 (integer) - ID of an artist
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "client":
+                {
+                    "id": 1,
+                    "fullname": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone_number": "587458625",
+                    "age" : 18
+                },
+                "service":
+                {
+                    "id": 1,
+                    "name":"Matejko",
+                    "category:":
+                    {
+                        "id": 1,
+                        "name": "Logo"
+                    }
+                },
+                "order_status": "CREATED",
+                "notes": "Contact via email"
+            }
+        ]
+        
++ Response 404 (application/json)
+
+        {
+            "message": "NOT FOUND"
+        }
+        
+<!-- ORDERS END -->
