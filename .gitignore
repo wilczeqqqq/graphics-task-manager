@@ -37,3 +37,4 @@
 .idea
 /vendor/bundle/
 *.iml
+*.pdf
