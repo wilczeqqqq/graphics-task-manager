@@ -22,7 +22,7 @@
 
 **Configure IDE to work with Ruby on Rails:**
 * Launch `graphics-task-manager` project
-* `File > Project Structure > Project Settings > Project > SKD` and add Ruby interpreter using Ruby installation path _(Intellij should find it by itself)_
+* `File > Project Structure > Project Settings > Project > SDK` and add Ruby interpreter using Ruby installation path _(Intellij should find it by itself)_
 * Run terminal `Alt + F12`
 * ```sh
     gem install bundler
