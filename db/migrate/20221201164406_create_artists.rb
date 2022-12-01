@@ -5,7 +5,7 @@ class CreateArtists < ActiveRecord::Migration[7.0]
       t.string :password
       t.string :nickname
       t.string :bio
-      t.string :preffered_style
+      t.string :preferred_style
       t.string :token
 
       t.timestamps
