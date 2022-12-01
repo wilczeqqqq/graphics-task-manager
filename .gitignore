@@ -38,3 +38,4 @@
 /vendor/bundle/
 *.iml
 *.pdf
+/db/schema.rb
