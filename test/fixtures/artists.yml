@@ -5,7 +5,7 @@ one:
   password: MyString
   nickname: MyString
   bio: MyString
-  preffered_style: MyString
+  preferred_style: MyString
   token: MyString
 
 two:
@@ -13,5 +13,5 @@ two:
   password: MyString
   nickname: MyString
   bio: MyString
-  preffered_style: MyString
+  preferred_style: MyString
   token: MyString
