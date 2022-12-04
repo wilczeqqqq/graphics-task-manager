@@ -38,11 +38,11 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to client_url(@client)
   end
 
-  test "should destroy client" do
-    assert_difference("Client.count", -1) do
-      delete client_url(@client)
-    end
-
-    assert_redirected_to clients_url
-  end
+  # test "should destroy client" do
+  #   assert_difference("Client.count", -1) do
+  #     delete client_url(@client)
+  #   end
+  #
+  #   assert_redirected_to clients_url
+  # end
 end
