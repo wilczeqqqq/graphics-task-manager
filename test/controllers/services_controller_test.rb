@@ -38,11 +38,11 @@ class ServicesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to service_url(@service)
   end
 
-  test "should destroy service" do
-    assert_difference("Service.count", -1) do
-      delete service_url(@service)
-    end
-
-    assert_redirected_to services_url
-  end
+  # test "should destroy service" do
+  #   assert_difference("Service.count", -1) do
+  #     delete service_url(@service)
+  #   end
+  #
+  #   assert_redirected_to services_url
+  # end
 end
