@@ -7,19 +7,22 @@ ArtGear - Graphics Task Manager
 
 <!-- TOKEN START -->
 
-## Login [/login{?login}{?password}]
+## Login [/login]
 
 ### Login [POST]
 
-+ Request
-    + Headers   
-            
-            Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
++ Request (application/json)
+    + Headers
     
-+ Parameters
-    + login: MatejkoPL (string) - Artist's login
-    + password: Stanczyk123! (string) - Artist's password
+            Accept: application/json
+            
+    + Body
+    
+            {
+                "login": "MatejkoPL",
+                "password": "Stanczyk123!"
+            }
+
 
 + Response 200 (application/json)
 
@@ -59,7 +62,7 @@ ArtGear - Graphics Task Manager
 
 <!-- ARTISTS START -->
 
-## All Artists [/artists{?login}{?password}{?nickname}{?bio}{?preffered_style}]
+## All Artists [/artists]
 
 ### List All Artists [GET]
 
@@ -89,18 +92,20 @@ ArtGear - Graphics Task Manager
 
 ### Create An Artist [POST]
 
-+ Request
-    + Headers   
-            
-            Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
++ Request (application/json)
+    + Headers
     
-+ Parameters
-    + login: MatejkoPL (string) - Artist's login
-    + password: Stanczyk123! (string) - Artist's password
-    + nickname: Matejko (string) - Artist's nickname
-    + bio: Painter... (string, optional) - Artist's bio
-    + preffered_style: Old painting (string, optional) - Artist's preffered style
+            Accept: application/json
+            
+    + Body
+    
+            {
+                "login": "MatejkoPL",
+                "password": "Stanczyk123!",
+                "nickname": "Matejko",
+                "bio": "Painter...",
+                "preffered_style": "Old painting"
+            }
 
 + Response 201 (application/json)
 
@@ -119,7 +124,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
         
-## An Artist [/artists/{id}{?login}{?password}{?nickname}{?bio}{?preffered_style}]
+## An Artist [/artists/{id}]
 
 ### List An Artist [GET]
 
@@ -173,19 +178,24 @@ ArtGear - Graphics Task Manager
         
 ### Update An Artist [PATCH]
 
-+ Request
++ Request (application/json)
     + Headers
-        
+    
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "password": "Stanczyk123!",
+                "nickname": "Matejko",
+                "bio": "Painter...",
+                "preffered_style": "Old painting"
+            }
+            
     
 + Parameters
     + id: 1 (integer) - ID of an artist
-    + password: Stanczyk123! (string, optional) - Artist's password
-    + nickname: Matejko (string, optional) - Artist's nickname
-    + bio: Painter... (string, optional) - Artist's bio
-    + preffered_style: Old painting (string, optional) - Artist's preffered style
 
 + Response 200 (application/json)
 
@@ -214,7 +224,7 @@ ArtGear - Graphics Task Manager
 
 <!-- CLIENTS START -->
 
-## All Clients [/clients{?full_name}{?email}{?phone_number}{?age}]
+## All Clients [/clients]
 
 ### List All Clients [GET]
 
@@ -252,17 +262,20 @@ ArtGear - Graphics Task Manager
 
 ### Create A Client [POST]
 
-+ Request
-    + Headers   
-            
-            Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
++ Request (application/json)
+    + Headers
     
-+ Parameters
-    + full_name: Jan Kowalski (string) - Client's full name
-    + email: jan.kowalski@gmail.com (string) - Client's email
-    + phone_number: 587458625 (string) - Client's phone number
-    + age: 18 (integer) - Client's age
+            Accept: application/json
+            Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "full_name": "Jan Kowalski",
+                "email": "jan.kowalski@gmail.com",
+                "phone_number": "587458625",
+                "age": "18"
+            }
 
 + Response 201 (application/json)
 
@@ -281,7 +294,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
 
-## A Client [/clients/{id}{?full_name}{?email}{?phone_number}{?age}]
+## A Client [/clients/{id}]
 
 ### List A Client [GET]
 
@@ -324,6 +337,7 @@ ArtGear - Graphics Task Manager
     + Headers
         
             Accept: application/json
+            Authorization: [auth_token]
         
 + Parameters
     + id: 1 (integer) - ID of a client
@@ -342,18 +356,23 @@ ArtGear - Graphics Task Manager
         
 ### Update A Client [PATCH]
 
-+ Request
++ Request (application/json)
     + Headers
-        
+    
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
+            Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "full_name": "Piotr Nowak",
+                "email": "piotr.nowak@gmail.com",
+                "phone_number": "698741258",
+                "age": 45
+            }
     
 + Parameters
     + id: 1 (integer) - ID of a client
-    + full_name: Piotr Nowak (string, optional) - Client's full name
-    + email: piotr.nowak@gmail.com (string, optional) - Client's email
-    + phone_number: 698741258 (string, optional) - Client's phone number
-    + age: 45 (integer, optional) - Client's age
 
 + Response 200 (application/json)
 
@@ -381,7 +400,7 @@ ArtGear - Graphics Task Manager
 
 <!-- ADDRESSES START -->
 
-## All Addresses [/clients/{id}/addresses{?address_line_1}{?address_line_2}{?postal_code}{?city}{?country}]
+## All Addresses [/clients/{id}/addresses]
 
 ### List An Address [GET]
 
@@ -421,23 +440,25 @@ ArtGear - Graphics Task Manager
         
 ### Create An Address [POST]
 
-+ Request
-    + Headers   
-            
-            Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
++ Request (application/json)
+    + Headers
     
-+ Parameters
-    + id: 1 (integer) - Client's ID
-    + address_line_1: Plac Grunwaldzki (string) - Client's address line number 1
-    + address_line_2: 109 (string, optional) - Client's address line number 2
-    + postal_code: 50379 (string) - Client's postal code
-    + city: Wrocław (string) - Client's city
-    + country: PL (string) - Client's country
+            Accept: application/json
+            Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "address_line_1": "Plac Grunwaldzki",
+                "address_line_2": "109",
+                "postal_code": "50379",
+                "city": "Wrocław",
+                "country": "PL"
+            }
 
 + Response 201 (application/json)
 
-        [
+        
             {
                 "id": 1,
                 "client":
@@ -454,7 +475,7 @@ ArtGear - Graphics Task Manager
                 "city": "Wrocław",
                 "country": "PL"
             }
-        ]
+        
         
 + Response 400 (application/json)
 
@@ -462,7 +483,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
         
-## An Address [/clients/{id}/addresses/{address_id}{?client_id}{?address_line_1}{?address_line_2}{?postal_code}{?city}{?country}]
+## An Address [/clients/{id}/addresses/{address_id}]
 ### Delete An Address [DELETE]
 
 + Request
@@ -489,21 +510,25 @@ ArtGear - Graphics Task Manager
         
 ### Update An Address [PATCH]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "address_line_1": "Kosciuszki",
+                "address_line_2": "109",
+                "postal_code": "50370",
+                "city": "Wrocław",
+                "country": "PL"
+            }
     
 + Parameters
     + address_id: 1 (integer) - ID of an address
     + id: 1 (integer) - ID of a client
-    + address_line_1: Plac Grunwaldzki (string, optional) - Client's address line number 1
-    + address_line_2: 109 (string, optional) - Client's address line number 2
-    + postal_code: 50379 (string, optional) - Client's postal code
-    + city: Wrocław (string, optional) - Client's city
-    + country: PL (string, optional) - Client's country
 
 + Response 200 (application/json)
 
@@ -540,7 +565,7 @@ ArtGear - Graphics Task Manager
 
 <!-- SERVICES START -->
 
-## All Services [/services{?category_id}{?name}]
+## All Services [/services]
 
 ### List All Services [GET]
 
@@ -571,16 +596,18 @@ ArtGear - Graphics Task Manager
 
 ### Create A Service [POST]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
     
-+ Parameters
-    + category_id: 1 (integer) - ID of a service category
-    + name: Making a logo (string) - Service name
+            {
+                "name": "Making a logo",
+                "category_id"Update: 1
+            }
 
 + Response 201 (application/json)
 
@@ -600,7 +627,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
 
-## A Service [/services/{id}{?category_id}{?name}]
+## A Service [/services/{id}]
 
 ### List A Service [GET]
 
@@ -655,17 +682,21 @@ ArtGear - Graphics Task Manager
         
 ### Update A Service [PATCH]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "name": "Making a poster",
+                "category_id": 2
+            }
     
 + Parameters
     + id: 1 (integer) -  ID of a service
-    + category_id: 2 (integer, optional) - ID of a service category
-    + name: Making a poster (string, optional) - Service name
 
 + Response 200 (application/json)
 
@@ -691,7 +722,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
         
-## Services By Category [/services/{category_id}{?name}]
+## Services By Category [/services/{category_id}]
 
 ### List Services by Category [GET]
 
@@ -722,7 +753,7 @@ ArtGear - Graphics Task Manager
 
 <!-- CATEGORIES START -->
 
-## All Categories [/categories{?name}]
+## All Categories [/categories]
 
 ### List All Categories [GET]
 
@@ -748,15 +779,17 @@ ArtGear - Graphics Task Manager
 
 ### Create A Category [POST]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
     
-+ Parameters
-    + name: Logo (string) - Category name
+            {
+                "name": "Logo",
+            }
 
 + Response 201 (application/json)
 
@@ -771,7 +804,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
 
-## A Category [/categories/{id}{?name}]
+## A Category [/categories/{id}]
 
 ### List A Category [GET]
 
@@ -821,16 +854,20 @@ ArtGear - Graphics Task Manager
         
 ### Update A Category [PATCH]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
+    
+            {
+                "name": "Poster",
+            }
     
 + Parameters
     + id: 1 (integer) - ID of a category
-    + name: Poster (string, optional) - Category name
 
 + Response 200 (application/json)
 
@@ -855,7 +892,7 @@ ArtGear - Graphics Task Manager
 
 <!-- ORDERS START -->
 
-## All Orders [/orders{?client_id}{?artist_id}{?service_id}{?order_status}{?notes}]
+## All Orders [/orders]
 
 ### List All Orders [GET]
 
@@ -907,17 +944,19 @@ ArtGear - Graphics Task Manager
 
 ### Create An Order [POST]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
+            
+    + Body
     
-+ Parameters
-    + client_id: 1 (string) - ID of a client
-    + artist_id: 1 (string) - ID of an artist
-    + service_id: 1 (string) - ID of a service
-    + notes: Contact via email (string, optional) - Notes to order
+            {
+                "client_id": 1,
+                "artist_id": 1,
+                "service_id": 1,
+                "notes": "Contact via email",
+            }
 
 + Response 201 (application/json)
 
@@ -958,7 +997,7 @@ ArtGear - Graphics Task Manager
             "message": "BAD REQUEST"
         }
 
-## An Order [/orders/{id}{?order_status}]
+## An Order [/orders/{id}]
 
 ### List An Order [GET]
 
@@ -1033,16 +1072,20 @@ ArtGear - Graphics Task Manager
         
 ### Update An Order Status [PATCH]
 
-+ Request
++ Request (application/json)
     + Headers
     
             Accept: application/json
-            Content-Type: application/x-www-form-urlencoded
             Authorization: [auth_token]
+            
+    + Body
     
+            {
+                "order_status": "COMPLETED"
+            }
+            
 + Parameters
     + id: 1 (integer) - ID of an order
-    + order_status: COMPLETED (string, optional) - Order status
 
 + Response 200 (application/json)
 
