@@ -2,16 +2,16 @@
 
 one:
   login: MyString
-  password: MyString
   nickname: MyString
+  password_digest: MyString
   bio: MyString
   preferred_style: MyString
   token: MyString
 
 two:
   login: MyString
-  password: MyString
   nickname: MyString
+  password_digest: MyString
   bio: MyString
   preferred_style: MyString
   token: MyString
