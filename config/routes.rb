@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+  root 'static#index'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
   resources :categories
   resources :addresses
   resources :orders
   resources :services
   resources :artists
   resources :clients
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  root 'static#index'
+  resources :sessions
 end

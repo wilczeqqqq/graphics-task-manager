@@ -1,16 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  login: MyString
-  nickname: MyString
+  login: login1
+  nickname: nickname1
   password_digest: MyString
   bio: MyString
   preferred_style: MyString
   token: MyString
 
 two:
-  login: MyString
-  nickname: MyString
+  login: login2
+  nickname: nickname2
   password_digest: MyString
   bio: MyString
   preferred_style: MyString

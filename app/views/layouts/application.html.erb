@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GraphicsTaskManager</title>
+    <title>ArtGear</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+  <% if logged_in? %>
+    Logged in as <%= current_artist.nickname %>
+    <%= button_to "Profile", current_artist, method: :get %>
+    <%= button_to "Logout", logout_path, method: :delete %>
+  <% else %>
+    Logged out
+    <%= button_to "Login", login_path, method: :get %>
+  <% end %>
+
+  <%= yield %>
   </body>
 </html>
