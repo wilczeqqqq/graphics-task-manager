@@ -1,19 +1,14 @@
 module V1
   class SessionsController < ApplicationController
-    # def create
-    #   artist = Artist.find_by(login: params[:session][:login])
-    #   if artist && artist.authenticate(params[:session][:password])
-    #     log_in artist
-    #     redirect_to artist
-    #   else
-    #     render 'new'
-    #   end
-    # end
-    #
-    # def destroy
-    #   log_out
-    #   redirect_to root_url
-    # end
-    # TODO add token
+
+    def login
+      artist = Artist.find_by_login(params[:login])
+      if artist && artist.authenticate(params[:password])
+        token = jwt_encode(artist_id: artist.id)
+        render json: { "token": token }, status: :ok
+      else
+        render json: { "error": "incorrect credentials" }, status: :unauthorized
+      end
+    end
   end
 end

@@ -1,7 +1,9 @@
 module V1
   class ServicesController < ApplicationController
+    before_action :authenticate_request, only: [:create, :destroy, :update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
+    rescue_from JWT::DecodeError, with: :unauthorized
 
     # DONE
 
@@ -57,6 +59,10 @@ module V1
 
     def foreign_key_block
       render json: { "error": "foreign key in use" }, status: :internal_server_error
+    end
+
+    def unauthorized
+      render json: { "error": "unauthorized or token expired" }, status: :unauthorized
     end
   end
 end

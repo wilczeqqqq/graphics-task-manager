@@ -1,8 +1,10 @@
 module V1
   class AddressesController < ApplicationController
     before_action :get_client
+    before_action :authenticate_request, only: [:create, :destroy, :update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
+    rescue_from JWT::DecodeError, with: :unauthorized
 
     # GET /addresses or /addresses.json
     def index
@@ -66,6 +68,10 @@ module V1
 
     def get_client
       @client = Client.find(params[:client_id])
+    end
+
+    def unauthorized
+      render json: { "error": "unauthorized or token expired" }, status: :unauthorized
     end
   end
 end
