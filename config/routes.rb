@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
-  root 'static#index'
+  root to: proc { [404, {}, ["Not found."]] }
+  namespace 'v1' do
+    root to: proc { [404, {}, ["Not found."]] }
 
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+    post '/login', to: 'sessions#login'
 
-  resources :categories
-  resources :addresses
-  resources :orders
-  resources :services
-  resources :artists
-  resources :clients
-  resources :sessions
+    get '/categories/:id/services', to: 'categories#list_services'
+    get '/artists/:id/orders', to: 'artists#list_orders'
+    get '/clients/:id/orders', to: 'clients#list_orders'
+
+    resources :categories
+    resources :orders
+    resources :services
+    resources :artists
+    resources :clients do
+      resources :addresses
+    end
+  end
 end

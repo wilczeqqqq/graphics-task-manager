@@ -5,7 +5,6 @@ class CreateArtists < ActiveRecord::Migration[7.0]
       t.string :nickname
       t.string :bio
       t.string :preferred_style
-      t.string :token
 
       t.timestamps
     end
