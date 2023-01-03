@@ -187,6 +187,9 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.5.2-x64-mingw-ucrt)
     sqlite3 (1.5.2-x86_64-linux)
+    swagger-docs (0.2.9)
+      activesupport (>= 3)
+      rails (>= 3)
     thor (1.2.1)
     timeout (0.3.0)
     tzinfo (2.0.5)
@@ -229,6 +232,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
+  swagger-docs
   tzinfo-data
   web-console
   webdrivers

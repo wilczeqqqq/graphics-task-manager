@@ -1,0 +1,142 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "categories",
+  "apis": [
+    {
+      "path": "/v1/categories/{id}/services",
+      "operations": [
+        {
+          "summary": "Returns services for a category",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Categories#list_services",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/categories",
+      "operations": [
+        {
+          "summary": "Returns all categories",
+          "nickname": "V1::Categories#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/categories",
+      "operations": [
+        {
+          "summary": "Creates a category",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Categories#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/categories/{id}",
+      "operations": [
+        {
+          "summary": "Returns a category",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Categories#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/categories/{id}",
+      "operations": [
+        {
+          "summary": "Updates a category",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Categories#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/categories/{id}",
+      "operations": [
+        {
+          "summary": "Deletes a category",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Categories#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

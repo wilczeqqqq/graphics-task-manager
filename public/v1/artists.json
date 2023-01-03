@@ -1,0 +1,142 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "artists",
+  "apis": [
+    {
+      "path": "/v1/artists/{id}/orders",
+      "operations": [
+        {
+          "summary": "Returns artist' orders",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Artists#list_orders",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/artists",
+      "operations": [
+        {
+          "summary": "Returns all artists' details",
+          "nickname": "V1::Artists#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/artists",
+      "operations": [
+        {
+          "summary": "Creates an artist",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Artists#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/artists/{id}",
+      "operations": [
+        {
+          "summary": "Returns an artist' details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Artists#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/artists/{id}",
+      "operations": [
+        {
+          "summary": "Updates an artist's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Artists#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/artists/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an artist",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Artist ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Artists#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

@@ -1,0 +1,160 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "addresses",
+  "apis": [
+    {
+      "path": "/v1/clients/{client_id}/addresses",
+      "operations": [
+        {
+          "summary": "Returns all addresses for a client",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "client_id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Addresses#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{client_id}/addresses",
+      "operations": [
+        {
+          "summary": "Creates an address for a client",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "client_id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Addresses#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{client_id}/addresses/{id}",
+      "operations": [
+        {
+          "summary": "Returns an addresses for a client",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "client_id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Address ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Addresses#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{client_id}/addresses/{id}",
+      "operations": [
+        {
+          "summary": "Updates an address for a client",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "client_id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Address ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Addresses#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{client_id}/addresses/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an address for a client",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "client_id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Address ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Addresses#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

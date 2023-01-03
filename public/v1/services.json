@@ -1,0 +1,123 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "services",
+  "apis": [
+    {
+      "path": "/v1/services",
+      "operations": [
+        {
+          "summary": "Returns all services",
+          "nickname": "V1::Services#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/services",
+      "operations": [
+        {
+          "summary": "Creates a service",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Services#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/services/{id}",
+      "operations": [
+        {
+          "summary": "Returns a service",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Service ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Services#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/services/{id}",
+      "operations": [
+        {
+          "summary": "Updates a service",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Service ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Services#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/services/{id}",
+      "operations": [
+        {
+          "summary": "Deletes a service",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Service ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Services#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

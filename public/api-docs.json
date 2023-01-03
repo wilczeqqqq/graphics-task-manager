@@ -1,0 +1,36 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "apis": [
+    {
+      "path": "/../v1/sessions.{format}",
+      "description": "Session"
+    },
+    {
+      "path": "/../v1/categories.{format}",
+      "description": "Categories"
+    },
+    {
+      "path": "/../v1/artists.{format}",
+      "description": "Artists"
+    },
+    {
+      "path": "/../v1/clients.{format}",
+      "description": "Clients"
+    },
+    {
+      "path": "/../v1/orders.{format}",
+      "description": "Orders"
+    },
+    {
+      "path": "/../v1/services.{format}",
+      "description": "Services"
+    },
+    {
+      "path": "/../v1/addresses.{format}",
+      "description": "Addresses"
+    }
+  ],
+  "authorizations": null
+}
