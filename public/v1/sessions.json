@@ -1,0 +1,28 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "sessions",
+  "apis": [
+    {
+      "path": "/v1/login",
+      "operations": [
+        {
+          "summary": "Returns a token",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Sessions#login",
+          "method": "post"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

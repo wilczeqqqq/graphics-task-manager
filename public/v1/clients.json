@@ -1,0 +1,142 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "clients",
+  "apis": [
+    {
+      "path": "/v1/clients/{id}/orders",
+      "operations": [
+        {
+          "summary": "Returns client' orders",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Category ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Clients#list_orders",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients",
+      "operations": [
+        {
+          "summary": "Returns all clients details",
+          "nickname": "V1::Clients#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients",
+      "operations": [
+        {
+          "summary": "Creates a client",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Clients#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{id}",
+      "operations": [
+        {
+          "summary": "Returns a client' details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Clients#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{id}",
+      "operations": [
+        {
+          "summary": "Updates an client's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Clients#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/clients/{id}",
+      "operations": [
+        {
+          "summary": "Deletes a client",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Client ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Clients#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

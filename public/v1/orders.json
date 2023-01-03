@@ -1,0 +1,123 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "orders",
+  "apis": [
+    {
+      "path": "/v1/orders",
+      "operations": [
+        {
+          "summary": "Returns all orders",
+          "nickname": "V1::Orders#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/orders",
+      "operations": [
+        {
+          "summary": "Creates an order",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Orders#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/orders/{id}",
+      "operations": [
+        {
+          "summary": "Returns an order",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Order ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Orders#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/orders/{id}",
+      "operations": [
+        {
+          "summary": "Updates an order status",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Order ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Orders#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/orders/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an order",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Order ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication bearer token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Orders#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

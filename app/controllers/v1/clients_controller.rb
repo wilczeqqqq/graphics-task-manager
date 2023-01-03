@@ -5,21 +5,36 @@ module V1
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
     rescue_from JWT::DecodeError, with: :unauthorized
 
-    # DONE
+    swagger_controller :clients, 'Clients'
 
     # GET /clients
+    swagger_api :index do
+      summary 'Returns all clients details'
+    end
+
     def index
       clients = Client.all
       render json: clients, only: [:id, :full_name, :email, :phone, :age], status: :ok
     end
 
     # GET /clients/1
+    swagger_api :show do
+      summary 'Returns a client\' details'
+      param :path, :id, :integer, :required, "Client ID"
+    end
+
     def show
       client = Client.find(params[:id])
       render json: client, only: [:id, :full_name, :email, :phone, :age], status: :ok
     end
 
     # POST /clients
+    swagger_api :create do
+      summary 'Creates a client'
+      param :body, :body, :string, :required, "Request body"
+      param :header, :Authorization, :string, :required, "Authentication bearer token"
+    end
+
     def create
       client = Client.new(client_params)
       if client.save
@@ -30,6 +45,13 @@ module V1
     end
 
     # PATCH/PUT /clients/1
+    swagger_api :update do
+      summary 'Updates an client\'s details'
+      param :path, :id, :integer, :required, "Client ID"
+      param :body, :body, :string, :required, "Request body"
+      param :header, :Authorization, :string, :required, "Authentication bearer token"
+    end
+
     def update
       client = Client.find(params[:id])
       if client.update(client_params)
@@ -40,6 +62,12 @@ module V1
     end
 
     # DELETE /clients/1
+    swagger_api :destroy do
+      summary 'Deletes a client'
+      param :path, :id, :integer, :required, "Client ID"
+      param :header, :Authorization, :string, :required, "Authentication bearer token"
+    end
+
     def destroy
       client = Client.find(params[:id])
       client.destroy
@@ -47,6 +75,11 @@ module V1
     end
 
     # GET /clients/1/orders
+    swagger_api :list_orders do
+      summary 'Returns client\' orders'
+      param :path, :id, :integer, :required, "Category ID"
+    end
+
     def list_orders
       client = Client.find(params[:id])
       render json: client, only: [:id, :full_name], include:

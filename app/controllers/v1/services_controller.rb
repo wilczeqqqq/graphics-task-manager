@@ -5,21 +5,36 @@ module V1
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
     rescue_from JWT::DecodeError, with: :unauthorized
 
-    # DONE
+    swagger_controller :services, 'Services'
 
     # GET /services
+    swagger_api :index do
+      summary 'Returns all services'
+    end
+
     def index
       services = Service.all
       render json: services, only: [:id, :name], include: { category: { only: [:id, :name] } }, status: :ok
     end
 
     # GET /services/1
+    swagger_api :show do
+      summary 'Returns a service'
+      param :path, :id, :integer, :required, "Service ID"
+    end
+
     def show
       service = Service.find(params[:id])
       render json: service, only: [:id, :name], include: { category: { only: [:id, :name] } }, status: :ok
     end
 
     # POST /services
+    swagger_api :create do
+      summary 'Creates a service'
+      param :body, :body, :string, :required, "Request body"
+      param :header, :Authorization, :string, :required, "Authentication bearer token"
+    end
+
     def create
       service = Service.new(service_params)
       if service.save
@@ -30,6 +45,13 @@ module V1
     end
 
     # PATCH/PUT /services/1
+    swagger_api :update do
+      summary 'Updates a service'
+      param :path, :id, :integer, :required, "Service ID"
+      param :body, :body, :string, :required, "Request body"
+      param :header, :Authorization, :string, :required, "Authentication bearer token"
+    end
+
     def update
       service = Service.find(params[:id])
       if service.update(service_params)
@@ -40,6 +62,12 @@ module V1
     end
 
     # DELETE /services/1
+    swagger_api :destroy do
+      summary 'Deletes a service'
+      param :path, :id, :integer, :required, "Service ID"
+      param :header, :Authorization, :string, :required, "Authentication bearer token"
+    end
+
     def destroy
       service = Service.find(params[:id])
       service.destroy
