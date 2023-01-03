@@ -1,6 +1,7 @@
 module V1
   class SessionsController < ApplicationController
 
+    # POST /login
     def login
       artist = Artist.find_by_login(params[:login])
       if artist && artist.authenticate(params[:password])

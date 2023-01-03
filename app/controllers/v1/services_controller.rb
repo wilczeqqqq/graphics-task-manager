@@ -7,19 +7,19 @@ module V1
 
     # DONE
 
-    # GET /services or /services.json
+    # GET /services
     def index
       services = Service.all
       render json: services, only: [:id, :name], include: { category: { only: [:id, :name] } }, status: :ok
     end
 
-    # GET /services/1 or /services/1.json
+    # GET /services/1
     def show
       service = Service.find(params[:id])
       render json: service, only: [:id, :name], include: { category: { only: [:id, :name] } }, status: :ok
     end
 
-    # POST /services or /services.json
+    # POST /services
     def create
       service = Service.new(service_params)
       if service.save
@@ -29,7 +29,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /services/1 or /services/1.json
+    # PATCH/PUT /services/1
     def update
       service = Service.find(params[:id])
       if service.update(service_params)
@@ -39,7 +39,7 @@ module V1
       end
     end
 
-    # DELETE /services/1 or /services/1.json
+    # DELETE /services/1
     def destroy
       service = Service.find(params[:id])
       service.destroy
@@ -48,7 +48,6 @@ module V1
 
     private
 
-    # Only allow a list of trusted parameters through.
     def service_params
       params.permit(:category_id, :name)
     end

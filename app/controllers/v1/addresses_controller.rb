@@ -6,19 +6,19 @@ module V1
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
     rescue_from JWT::DecodeError, with: :unauthorized
 
-    # GET /addresses or /addresses.json
+    # GET /clients/1/addresses
     def index
       addresses = @client.address
       render json: addresses, only: [:id, :address_line_1, :address_line_2, :postal_code, :city, :country], status: :ok
     end
 
-    # GET /addresses/1 or /addresses/1.json
+    # GET /clients/1/addresses/1
     def show
       address = @client.address.find(params[:id])
       render json: address, only: [:id, :address_line_1, :address_line_2, :postal_code, :city, :country], status: :ok
     end
 
-    # POST /addresses or /addresses.json
+    # POST /clients/1/addresses
     def create
       address = @client.address.build(address_params)
       if address.save
@@ -29,7 +29,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /addresses/1 or /addresses/1.json
+    # PATCH/PUT /clients/1/addresses/1
     def update
       address = @client.address.find(params[:id])
       if address.update(address_params)
@@ -40,7 +40,7 @@ module V1
       end
     end
 
-    # DELETE /addresses/1 or /addresses/1.json
+    # DELETE /clients/1/addresses/1
     def destroy
       address = @client.address.find(params[:id])
       address.destroy
@@ -49,7 +49,6 @@ module V1
 
     private
 
-    # Only allow a list of trusted parameters through.
     def address_params
       params.permit(:client_id, :address_line_1, :address_line_2, :postal_code, :city, :country)
     end

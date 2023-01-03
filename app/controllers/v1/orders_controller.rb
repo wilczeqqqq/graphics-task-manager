@@ -7,7 +7,7 @@ module V1
 
     # DONE
 
-    # GET /orders or /orders.json
+    # GET /orders
     def index
       orders = Order.all
       render json: orders, only: [:id, :order_status, :notes], include:
@@ -16,7 +16,7 @@ module V1
           }], status: :ok
     end
 
-    # GET /orders/1 or /orders/1.json
+    # GET /orders/1
     def show
       order = Order.find(params[:id])
       render json: order, only: [:id, :order_status, :notes], include:
@@ -25,7 +25,7 @@ module V1
         }], status: :ok
     end
 
-    # POST /orders or /orders.json
+    # POST /orders
     def create
       order = Order.new(order_params)
       order.order_status = "CREATED"
@@ -39,7 +39,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /orders/1 or /orders/1.json
+    # PATCH/PUT /orders/1
     def update
       order = Order.find(params[:id])
       if order.update(update_params)
@@ -49,7 +49,7 @@ module V1
       end
     end
 
-    # DELETE /orders/1 or /orders/1.json
+    # DELETE /orders/1
     def destroy
       order = Order.find(params[:id])
       order.destroy
@@ -58,7 +58,6 @@ module V1
 
     private
 
-    # Only allow a list of trusted parameters through.
     def order_params
       params.permit(:client_id, :artist_id, :service_id, :notes)
     end

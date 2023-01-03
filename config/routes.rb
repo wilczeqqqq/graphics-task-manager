@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  root to: proc { [404, {}, ["Not found."]] }
   namespace 'v1' do
+    root to: proc { [404, {}, ["Not found."]] }
+
     post '/login', to: 'sessions#login'
 
     get '/categories/:id/services', to: 'categories#list_services'

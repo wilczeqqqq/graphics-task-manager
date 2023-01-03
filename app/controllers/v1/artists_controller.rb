@@ -7,19 +7,19 @@ module V1
 
     # DONE
 
-    # GET /artists or /artists.json
+    # GET /artists
     def index
       artists = Artist.all
       render json: artists, only: [:id, :login, :password_digest, :nickname, :bio, :preferred_style], status: :ok
     end
 
-    # GET /artists/1 or /artists/1.json
+    # GET /artists/1
     def show
       artist = Artist.find(params[:id])
       render json: artist, only: [:id, :login, :password_digest, :nickname, :bio, :preferred_style], status: :ok
     end
 
-    # POST /artists or /artists.json
+    # POST /artists
     def create
       artist = Artist.new(artist_params)
       if artist.save
@@ -29,7 +29,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /artists/1 or /artists/1.json
+    # PATCH/PUT /artists/1
     def update
       artist = Artist.find(params[:id])
       if artist.update(artist_params)
@@ -39,13 +39,14 @@ module V1
       end
     end
 
-    # DELETE /artists/1 or /artists/1.json
+    # DELETE /artists/1
     def destroy
       artist = Artist.find(params[:id])
       artist.destroy
       render json: { "success": "true" }, status: :ok
     end
 
+    # GET /artists/1/orders
     def list_orders
       artist = Artist.find(params[:id])
       render json: artist, only: [:id, :login], include:
@@ -58,7 +59,6 @@ module V1
 
     private
 
-    # Only allow a list of trusted parameters through.
     def artist_params
       params.permit(:login, :password, :password_confirmation, :nickname, :bio, :preferred_style)
     end

@@ -7,19 +7,19 @@ module V1
 
     # DONE
 
-    # GET /categories or /categories.json
+    # GET /categories
     def index
       categories = Category.all
       render json: categories, only: [:id, :name], status: :ok
     end
 
-    # GET /categories/1 or /categories/1.json
+    # GET /categories/1
     def show
       category = Category.find(params[:id])
       render json: category, only: [:id, :name], status: :ok
     end
 
-    # POST /categories or /categories.json
+    # POST /categories
     def create
       category = Category.new(category_params)
       if category.save
@@ -29,7 +29,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /categories/1 or /categories/1.json
+    # PATCH/PUT /categories/1
     def update
       category = Category.find(params[:id])
       if category.update(category_params)
@@ -39,13 +39,14 @@ module V1
       end
     end
 
-    # DELETE /categories/1 or /categories/1.json
+    # DELETE /categories/1
     def destroy
       category = Category.find(params[:id])
       category.destroy
       render json: { "success": "true" }, status: :ok
     end
 
+    # GET /categories/1/services
     def list_services
       category = Category.find(params[:id])
       render json: category, only: [:id, :name], include: { services: { only: [:id, :name] } }, status: :ok
@@ -53,7 +54,6 @@ module V1
 
     private
 
-    # Only allow a list of trusted parameters through.
     def category_params
       params.permit(:name)
     end

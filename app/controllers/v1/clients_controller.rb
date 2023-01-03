@@ -7,19 +7,19 @@ module V1
 
     # DONE
 
-    # GET /clients or /clients.json
+    # GET /clients
     def index
       clients = Client.all
       render json: clients, only: [:id, :full_name, :email, :phone, :age], status: :ok
     end
 
-    # GET /clients/1 or /clients/1.json
+    # GET /clients/1
     def show
       client = Client.find(params[:id])
       render json: client, only: [:id, :full_name, :email, :phone, :age], status: :ok
     end
 
-    # POST /clients or /clients.json
+    # POST /clients
     def create
       client = Client.new(client_params)
       if client.save
@@ -29,7 +29,7 @@ module V1
       end
     end
 
-    # PATCH/PUT /clients/1 or /clients/1.json
+    # PATCH/PUT /clients/1
     def update
       client = Client.find(params[:id])
       if client.update(client_params)
@@ -39,13 +39,14 @@ module V1
       end
     end
 
-    # DELETE /clients/1 or /clients/1.json
+    # DELETE /clients/1
     def destroy
       client = Client.find(params[:id])
       client.destroy
       render json: { "success": "true" }, status: :ok
     end
 
+    # GET /clients/1/orders
     def list_orders
       client = Client.find(params[:id])
       render json: client, only: [:id, :full_name], include:
@@ -58,7 +59,6 @@ module V1
 
     private
 
-    # Only allow a list of trusted parameters through.
     def client_params
       params.permit(:full_name, :email, :phone, :age)
     end
