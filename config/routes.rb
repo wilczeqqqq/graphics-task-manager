@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: proc { [404, {}, ["Not found."]] }
+  root to: redirect('/api')
 
   get '/api' => redirect('/swagger/dist/index.html?url=/api-docs.json')
 

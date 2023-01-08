@@ -14,7 +14,7 @@ module V1
         token = jwt_encode(artist_id: artist.id)
         render json: { "token": token }, status: :ok
       else
-        render json: { "error": "incorrect credentials" }, status: :unauthorized
+        render json: { "error": "Incorrect credentials" }, status: :unauthorized
       end
     end
   end

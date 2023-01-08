@@ -37,5 +37,6 @@
 .idea
 /vendor/bundle/
 *.iml
-*.pdf
 /db/schema.rb
+/out/
+/tmp/

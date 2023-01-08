@@ -3,6 +3,7 @@ module V1
     before_action :authenticate_request, only: [:destroy, :update, :list_orders]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
+    rescue_from ActiveRecord::NotNullViolation, with: :not_null
     rescue_from JWT::DecodeError, with: :unauthorized
 
     swagger_controller :artists, 'Artists'
@@ -75,14 +76,14 @@ module V1
 
     # GET /artists/1/orders
     swagger_api :list_orders do
-      summary 'Returns artist\' orders'
+      summary 'Returns artist\'s orders [EXPERIMENTAL FEATURE SHOWCASE]'
       param :path, :id, :integer, :required, "Artist ID"
       param :header, :Authorization, :string, :required, "Authentication bearer token"
     end
 
     def list_orders
       artist = Artist.find(params[:id])
-      if @current_artist == artist # EXPERIMENTAL Show orders only for token's owner
+      if @current_artist == artist || @current_artist == "admin" # EXPERIMENTAL Show orders only for token's owner, unless it's admin's token
         render json: artist, only: [:id, :login], include:
           [orders: { only: [:id, :order_status, :notes], include:
             [client: { only: [:id, :full_name, :email, :phone, :age] }, service: { only: [:id, :name], include:
@@ -90,7 +91,7 @@ module V1
             }]
           }], status: :ok
       else
-        unauthorized
+        render json: { "error": "You have no access to artist with 'id'=#{artist.id}" }, status: :forbidden
       end
     end
 
@@ -104,16 +105,20 @@ module V1
       params.permit(:password, :password_confirmation, :nickname, :bio, :preferred_style)
     end
 
-    def not_found
-      render json: { "error": "not found" }, status: :not_found
+    def not_found(error)
+      render json: { "error": error.message }, status: :not_found
     end
 
     def foreign_key_block
-      render json: { "error": "foreign key in use" }, status: :internal_server_error
+      render json: { "error": "Foreign key in use" }, status: :internal_server_error
     end
 
-    def unauthorized
-      render json: { "error": "unauthorized or token expired" }, status: :unauthorized
+    def not_null(error)
+      render json: { "error": error.message }, status: :internal_server_error
+    end
+
+    def unauthorized(error)
+      render json: { "error": error.message }, status: :unauthorized
     end
   end
 end
