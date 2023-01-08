@@ -4,6 +4,7 @@ module V1
     before_action :authenticate_request, only: [:create, :destroy, :update]
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from ActiveRecord::InvalidForeignKey, with: :foreign_key_block
+    rescue_from ActiveRecord::NotNullViolation, with: :not_null
     rescue_from JWT::DecodeError, with: :unauthorized
 
     swagger_controller :addresses, 'Addresses'
@@ -92,20 +93,24 @@ module V1
       params.permit(:address_line_1, :address_line_2, :postal_code, :city, :country)
     end
 
-    def not_found
-      render json: { "error": "not found" }, status: :not_found
+    def not_found(error)
+      render json: { "error": error.message }, status: :not_found
     end
 
     def foreign_key_block
-      render json: { "error": "foreign key in use" }, status: :internal_server_error
+      render json: { "error": "Foreign key in use" }, status: :internal_server_error
+    end
+
+    def not_null(error)
+      render json: { "error": error.message }, status: :internal_server_error
     end
 
     def get_client
       @client = Client.find(params[:client_id])
     end
 
-    def unauthorized
-      render json: { "error": "unauthorized or token expired" }, status: :unauthorized
+    def unauthorized(error)
+      render json: { "error": error.message }, status: :unauthorized
     end
   end
 end

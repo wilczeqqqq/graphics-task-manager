@@ -4,7 +4,7 @@ class CreateOrders < ActiveRecord::Migration[7.0]
       t.references :client, null: false, foreign_key: true
       t.references :artist, null: false, foreign_key: true
       t.references :service, null: false, foreign_key: true
-      t.string :order_status
+      t.string :order_status, null: false
       t.string :notes
 
       t.timestamps
