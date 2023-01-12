@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  full_name: MyString
-  email: MyString
-  phone: MyString
-  age: 1
+  full_name: Jan Kowalski
+  email: jan.kowalski@gmail.com
+  phone: 587458625
+  age: 18
 
 two:
-  full_name: MyString
-  email: MyString
-  phone: MyString
-  age: 1
+  full_name: Piotr Nowak
+  email: piotr.nowak@gmail.com
+  phone: 589624851
+  age: 58

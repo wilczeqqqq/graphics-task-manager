@@ -107,7 +107,7 @@
             }
           ],
           "nickname": "V1::Categories#update",
-          "method": "patch"
+          "method": "put"
         }
       ]
     },

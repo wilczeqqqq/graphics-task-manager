@@ -55,7 +55,7 @@ module V1
     def update
       artist = Artist.find(params[:id])
       if artist.update(update_params)
-        render json: artist, only: [:id, :login, :password_digest, :nickname, :bio, :preferred_style], status: :created
+        render json: artist, only: [:id, :login, :password_digest, :nickname, :bio, :preferred_style], status: :ok
       else
         render json: artist.errors, status: :unprocessable_entity
       end

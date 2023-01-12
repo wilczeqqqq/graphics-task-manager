@@ -107,7 +107,7 @@
             }
           ],
           "nickname": "V1::Artists#update",
-          "method": "patch"
+          "method": "put"
         }
       ]
     },
