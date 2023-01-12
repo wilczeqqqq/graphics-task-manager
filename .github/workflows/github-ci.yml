@@ -1,19 +1,39 @@
-name: Testing
+name: Tests workflow
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  integration-tests:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
       - name: Install dependencies
         run: bundle install
+
       - name: Run tests
         run: |
           rake db:migrate RAILS_ENV=test
-          rake test
+          rake test:integration
+
+  postman-tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install newman
+        run: npm install -g newman
+
+      - name: Set up Ruby on Rails Development Environment
+        run: |
+          bundle install
+          rake db:drop:_unsafe db:create db:migrate db:seed
+          rails server -e development &
+
+      - name: Run tests
+        run: newman run test-postman/ArtGear_Postman_Test_Suite.postman_collection.json
