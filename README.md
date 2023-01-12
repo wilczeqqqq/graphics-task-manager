@@ -1,3 +1,9 @@
+# ArtGear - Graphics Task Manager
+
+[![Tests workflow](https://github.com/wilczeqqqq/graphics-task-manager/actions/workflows/github-ci.yml/badge.svg?branch=master)](https://github.com/wilczeqqqq/graphics-task-manager/actions/workflows/github-ci.yml)
+[![Ruby](https://img.shields.io/badge/Ruby-v3.1.2-red)](https://img.shields.io/badge/Ruby-v3.1.2-red)
+[![Rails](https://img.shields.io/badge/Rails-v7.0.4-red)](https://img.shields.io/badge/Rails-v7.0.4-red)
+
 # Environment configuration
 
 **Fetch license for Intellij Ultimate or RubyMine:**
