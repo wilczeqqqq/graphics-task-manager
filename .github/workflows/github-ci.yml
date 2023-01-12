@@ -36,6 +36,7 @@ jobs:
 
       - name: Set up Ruby on Rails Development Environment
         run: |
+          gem install rails
           bundle install
           rake db:drop:_unsafe db:create db:migrate db:seed
           rails server -e development &
