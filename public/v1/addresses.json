@@ -118,7 +118,7 @@
             }
           ],
           "nickname": "V1::Addresses#update",
-          "method": "patch"
+          "method": "put"
         }
       ]
     },
