@@ -29,6 +29,11 @@ jobs:
       - name: Install newman
         run: npm install -g newman
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
       - name: Set up Ruby on Rails Development Environment
         run: |
           bundle install
