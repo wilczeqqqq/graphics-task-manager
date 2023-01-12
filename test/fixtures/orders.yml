@@ -4,12 +4,12 @@ one:
   client: one
   artist: one
   service: one
-  order_status: MyString
-  notes: MyString
+  order_status: CREATED
+  notes: Logo with pink ponies
 
 two:
   client: two
   artist: two
   service: two
-  order_status: MyString
-  notes: MyString
+  order_status: IN_PROGRESS
+  notes: Poster with black cats

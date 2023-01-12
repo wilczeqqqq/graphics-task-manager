@@ -2,16 +2,24 @@
 
 one:
   client: one
-  address_line_1: MyString
-  address_line_2: MyString
-  postal_code: MyString
-  city: MyString
-  country: MyString
+  address_line_1: Plac Grunwaldzki
+  address_line_2: 109
+  postal_code: 50379
+  city: Wrocław
+  country: PL
 
 two:
   client: two
-  address_line_1: MyString
-  address_line_2: MyString
-  postal_code: MyString
-  city: MyString
-  country: MyString
+  address_line_1: Borowska
+  address_line_2: 24a/11
+  postal_code: 66004
+  city: Zielona Góra
+  country: PL
+
+three:
+  client: one
+  address_line_1: Wittiga
+  address_line_2: 9
+  postal_code: 50-000
+  city: Wrocław
+  country: PL

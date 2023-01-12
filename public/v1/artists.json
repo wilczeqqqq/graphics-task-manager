@@ -8,7 +8,7 @@
       "path": "/v1/artists/{id}/orders",
       "operations": [
         {
-          "summary": "Returns artist' orders",
+          "summary": "Returns artist's orders [EXPERIMENTAL FEATURE SHOWCASE]",
           "parameters": [
             {
               "paramType": "path",
@@ -107,7 +107,7 @@
             }
           ],
           "nickname": "V1::Artists#update",
-          "method": "patch"
+          "method": "put"
         }
       ]
     },

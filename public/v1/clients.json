@@ -107,7 +107,7 @@
             }
           ],
           "nickname": "V1::Clients#update",
-          "method": "patch"
+          "method": "put"
         }
       ]
     },
