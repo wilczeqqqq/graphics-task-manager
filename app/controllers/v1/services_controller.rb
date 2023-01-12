@@ -39,7 +39,7 @@ module V1
     def create
       service = Service.new(service_params)
       if service.save
-        render json: service, only: [:id, :name, :category_id], status: :created
+        render json: service, only: [:id, :name], include: { category: { only: [:id, :name] } }, status: :created
       else
         render json: service.errors, status: :unprocessable_entity
       end

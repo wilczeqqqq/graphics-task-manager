@@ -8,7 +8,7 @@ one:
   preferred_style: Old painting
 
 two:
-  login: login
+  login: user
   nickname: nickname
   password_digest: password_digest
   bio: bio

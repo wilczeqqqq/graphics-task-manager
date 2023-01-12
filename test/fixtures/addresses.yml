@@ -15,3 +15,11 @@ two:
   postal_code: 66004
   city: Zielona Góra
   country: PL
+
+three:
+  client: one
+  address_line_1: Wittiga
+  address_line_2: 9
+  postal_code: 50-000
+  city: Wrocław
+  country: PL
