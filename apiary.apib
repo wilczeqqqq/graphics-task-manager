@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://localhost:3000/
+HOST: http://127.0.0.1:3000/
 
 # ArtGear
 
@@ -30,32 +30,10 @@ ArtGear - Graphics Task Manager
             "token": "kQqci2KbktyAetKd12J4TCFa" 
         }
         
-+ Response 500 (application/json)
++ Response 401 (application/json)
 
         {
-            "message": "INTERNAL SERVER ERROR"
-        }
-        
-## Logout [/logout]
-
-### Logout [DELETE]
-
-+ Request
-    + Headers   
-            
-            Accept: application/json
-            Authorization: [auth_token]
-
-+ Response 200 (application/json)
-
-        {
-            "message": "logged out" 
-        }
-        
-+ Response 500 (application/json)
-
-        {
-            "message": "INTERNAL SERVER ERROR"
+            "error": "Incorrect credentials"
         }
 
 <!-- TOKEN END -->
@@ -80,14 +58,14 @@ ArtGear - Graphics Task Manager
                 "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
                 "nickname": "Matejko",
                 "bio": "Painter...",
-                "preffered_style": "Old painting"
+                "preferred_style": "Old painting"
             }
         ]
         
 + Response 500 (application/json)
 
         {
-            "message": "INTERNAL SERVER ERROR"
+            "error": "Internal Server Error"
         }
 
 ### Create An Artist [POST]
@@ -104,7 +82,7 @@ ArtGear - Graphics Task Manager
                 "password": "Stanczyk123!",
                 "nickname": "Matejko",
                 "bio": "Painter...",
-                "preffered_style": "Old painting"
+                "preferred_style": "Old painting"
             }
 
 + Response 201 (application/json)
@@ -115,13 +93,13 @@ ArtGear - Graphics Task Manager
                 "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
                 "nickname": "Matejko",
                 "bio": "Painter...",
-                "preffered_style": "Old painting"
+                "preferred_style": "Old painting"
         }
         
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
         
 ## An Artist [/artists/{id}]
@@ -144,13 +122,13 @@ ArtGear - Graphics Task Manager
                 "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
                 "nickname": "Matejko",
                 "bio": "Painter...",
-                "preffered_style": "Old painting"
+                "preferred_style": "Old painting"
         }
         
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Artist with 'id'=1"
         }
         
 ### Delete An Artist [DELETE]
@@ -173,7 +151,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Artist with 'id'=1"
         }
         
 ### Update An Artist [PATCH]
@@ -190,7 +168,7 @@ ArtGear - Graphics Task Manager
                 "password": "Stanczyk123!",
                 "nickname": "Matejko",
                 "bio": "Painter...",
-                "preffered_style": "Old painting"
+                "preferred_style": "Old painting"
             }
             
     
@@ -205,19 +183,67 @@ ArtGear - Graphics Task Manager
                 "password_digest": "90a3cea11ea9b3be14efe8bb9f3ad647",
                 "nickname": "Matejko",
                 "bio": "Painter...",
-                "preffered_style": "Old painting"
+                "preferred_style": "Old painting"
         }
         
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Artist with 'id'=1"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
+        }
+        
+## Artist's Orders [/artists/{id}/orders]
+
+### List Artist's Orders [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            Authorization: [auth_token]
+            
++ Parameters
+    + id: 1 (integer) - ID of an artist
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "login": "MatejkoPL",
+            "orders": [
+                {
+                    "id": 1,
+                    "order_status": "CREATED",
+                    "notes": "Logo with pink ponies",
+                    "client": {
+                        "id": 1,
+                        "full_name": "Jan Kowalski",
+                        "email": "jan.kowalski@gmail.com",
+                        "phone": "587458625",
+                        "age": 18
+                    },
+                    "service": {
+                        "id": 1,
+                        "name": "Making a logo",
+                        "category": {
+                            "id": 1,
+                            "name": "Logo"
+                        }
+                    }
+                }
+            ]
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "error": "Couldn't find Artist with 'id'=1"
         }
 
 <!-- ARTIST END -->
@@ -240,24 +266,15 @@ ArtGear - Graphics Task Manager
                 "id": 1,
                 "full_name": "Jan Kowalski",
                 "email": "jan.kowalski@gmail.com",
-                "phone_number": "587458625",
-                "age": 18,
-                "address":
-                {
-                    "id": 1,
-                    "address_line_1": "Plac Grunwaldzki",
-                    "address_line_2": "109",
-                    "postal_code": "50-379",
-                    "city":" Wroclaw",
-                    "country": "PL"
-                }
+                "phone": "587458625",
+                "age": 18
             }
         ]
 
 + Response 500 (application/json)
 
         {
-            "message": "INTERNAL SERVER ERROR"
+            "error": "Internal Server Error"
         }
 
 ### Create A Client [POST]
@@ -273,7 +290,7 @@ ArtGear - Graphics Task Manager
             {
                 "full_name": "Jan Kowalski",
                 "email": "jan.kowalski@gmail.com",
-                "phone_number": "587458625",
+                "phone": "587458625",
                 "age": "18"
             }
 
@@ -283,15 +300,14 @@ ArtGear - Graphics Task Manager
             "id": 1,
             "full_name": "Jan Kowalski",
             "email": "jan.kowalski@gmail.com",
-            "phone_number": "587458625",
-            "age": 18,
-            "address": {}
+            "phone": "587458625",
+            "age": 18
         }
         
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
 
 ## A Client [/clients/{id}]
@@ -312,23 +328,14 @@ ArtGear - Graphics Task Manager
             "id": 1,
             "full_name": "Jan Kowalski",
             "email": "jan.kowalski@gmail.com",
-            "phone_number": "587458625",
+            "phone": "587458625",
             "age": 18
-            "address":
-            {
-                "id": 1,
-                "address_line_1": "Plac Grunwaldzki",
-                "address_line_2": "109",
-                "postal_code": "50-379",
-                "city":" Wroclaw",
-                "country": "PL"
-            }
         }
         
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Client with 'id'=1"
         }
         
 ### Delete A Client [DELETE]
@@ -351,7 +358,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Client with 'id'=1"
         }
         
 ### Update A Client [PATCH]
@@ -367,7 +374,7 @@ ArtGear - Graphics Task Manager
             {
                 "full_name": "Piotr Nowak",
                 "email": "piotr.nowak@gmail.com",
-                "phone_number": "698741258",
+                "phone": "698741258",
                 "age": 45
             }
     
@@ -380,20 +387,66 @@ ArtGear - Graphics Task Manager
             "id": 1,
             "full_name": "Piotr Nowak",
             "email": "piotr.nowak@gmail.com",
-            "phone_number": "698741258",
+            "phone": "698741258",
             "age": 45
         }
         
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Client with 'id'=1"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
+        }
+        
+## User's Orders [/clients/{id}/orders]
+
+### List Client's Orders [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+            
++ Parameters
+    + id: 1 (integer) - ID of a client
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "full_name": "Jan Kowalski",
+            "orders": [
+                {
+                    "id": 1,
+                    "order_status": "CREATED",
+                    "notes": "Logo with pink ponies",
+                    "artist": {
+                        "id": 1,
+                        "nickname": "Matejko",
+                        "bio": "Painter...",
+                        "preferred_style": "Old painting"
+                    },
+                    "service": {
+                        "id": 1,
+                        "name": "Making a logo",
+                        "category": {
+                            "id": 1,
+                            "name": "Logo"
+                        }
+                    }
+                }
+            ]
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "error": "Couldn't find Client with 'id'=1"
         }
         
 <!-- CLIENTS END -->
@@ -402,7 +455,7 @@ ArtGear - Graphics Task Manager
 
 ## All Addresses [/clients/{id}/addresses]
 
-### List An Address [GET]
+### List Addresses [GET]
 
 + Request
     + Headers
@@ -415,27 +468,21 @@ ArtGear - Graphics Task Manager
 + Response 200 (application/json)
 
         
-            {
-                "id": 1,
-                "client":
+            [
                 {
                     "id": 1,
-                    "fullname": "Jan Kowalski",
-                    "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
-                    "age" : 18
-                },
-                "address_line_1": "Plac Grunwaldzki",
-                "address_line_2": "109",
-                "postal_code": "50379",
-                "city": "Wrocław",
-                "country": "PL"
-            }
+                    "address_line_1": "Plac Grunwaldzki",
+                    "address_line_2": "109",
+                    "postal_code": "50379",
+                    "city": "Wrocław",
+                    "country": "PL"
+                }
+            ]
             
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Client with 'id'=1"
         }
         
 ### Create An Address [POST]
@@ -455,32 +502,35 @@ ArtGear - Graphics Task Manager
                 "city": "Wrocław",
                 "country": "PL"
             }
+            
++ Parameters
+  + id: 1 (integer) - ID of a client
 
 + Response 201 (application/json)
 
         
             {
                 "id": 1,
-                "client":
-                {
-                    "id": 1,
-                    "fullname": "Jan Kowalski",
-                    "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
-                    "age" : 18
-                },
                 "address_line_1": "Plac Grunwaldzki",
                 "address_line_2": "109",
                 "postal_code": "50379",
                 "city": "Wrocław",
-                "country": "PL"
+                "country": "PL",
+                "client":
+                {
+                    "id": 1,
+                    "full_name": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone": "587458625",
+                    "age" : 18
+                }
             }
         
         
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
         
 ## An Address [/clients/{id}/addresses/{address_id}]
@@ -505,7 +555,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Address with 'id'=1"
         }
         
 ### Update An Address [PATCH]
@@ -534,31 +584,31 @@ ArtGear - Graphics Task Manager
 
             {
                 "id": 1,
-                "client":
-                {
-                    "id": 1,
-                    "fullname": "Jan Kowalski",
-                    "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
-                    "age" : 18
-                },
                 "address_line_1": "Kosciuszki",
                 "address_line_2": "109",
                 "postal_code": "50370",
                 "city": "Wrocław",
-                "country": "PL"
+                "country": "PL",
+                "client":
+                {
+                    "id": 1,
+                    "full_name": "Jan Kowalski",
+                    "email": "jan.kowalski@gmail.com" ,
+                    "phone": "587458625",
+                    "age" : 18
+                }
             }
             
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Address with 'id'=1"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
 
 <!-- ADDRESSES END -->
@@ -591,7 +641,7 @@ ArtGear - Graphics Task Manager
 + Response 500 (application/json)
 
         {
-            "message": "INTERNAL SERVER ERROR"
+            "error": "Internal Server Error"
         }
 
 ### Create A Service [POST]
@@ -606,7 +656,7 @@ ArtGear - Graphics Task Manager
     
             {
                 "name": "Making a logo",
-                "category_id"Update: 1
+                "category_id": 1
             }
 
 + Response 201 (application/json)
@@ -621,10 +671,10 @@ ArtGear - Graphics Task Manager
             }
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
 
 ## A Service [/services/{id}]
@@ -654,7 +704,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Service with 'id'=1"
         }
         
 ### Delete A Service [DELETE]
@@ -677,7 +727,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Service with 'id'=1"
         }
         
 ### Update A Service [PATCH]
@@ -713,40 +763,13 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Service with 'id'=1"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
-        }
-        
-## Services By Category [/services/{category_id}]
-
-### List Services by Category [GET]
-
-+ Request
-    + Headers
-    
-            Accept: application/json
-        
-+ Parameters
-    + category_id: 1 (integer) - ID of a service category
-    
-+ Response 200 (application/json)
-
-        [
-            {
-                "id": 1,
-                "name": "Making a logo"
-            }
-        ]
-        
-+ Response 404 (application/json)
-
-        {
-            "message": "NOT FOUND"
+            "error": "Unprocessable Entity"
         }
         
 <!-- SERVICES END -->
@@ -774,7 +797,7 @@ ArtGear - Graphics Task Manager
 + Response 500 (application/json)
 
         {
-            "message": "INTERNAL SERVER ERROR"
+            "error": "Internal Server Error"
         }
 
 ### Create A Category [POST]
@@ -798,10 +821,10 @@ ArtGear - Graphics Task Manager
             "name": "Logo"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
 
 ## A Category [/categories/{id}]
@@ -826,7 +849,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Category with 'id'=1"
         }
         
 ### Delete A Category [DELETE]
@@ -849,7 +872,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Category with 'id'=1"
         }
         
 ### Update A Category [PATCH]
@@ -879,13 +902,44 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Category with 'id'=1"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
+        }
+        
+## Services By Category [/categories/{id}/services]
+
+### List Services by Category [GET]
+
++ Request
+    + Headers
+    
+            Accept: application/json
+        
++ Parameters
+    + id: 1 (integer) - ID of a service category
+    
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Logo",
+            "services": [
+                {
+                    "id": 1,
+                    "name": "Making a logo"
+                }
+            ]
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "error": "Couldn't find Category with 'id'=1"
         }
         
 <!-- CATEGORIES END -->
@@ -909,9 +963,9 @@ ArtGear - Graphics Task Manager
                 "client":
                 {
                     "id": 1,
-                    "fullname": "Jan Kowalski",
+                    "full_name": "Jan Kowalski",
                     "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
+                    "phone": "587458625",
                     "age" : 18
                 },
                 "artist":
@@ -919,7 +973,7 @@ ArtGear - Graphics Task Manager
                     "id": 1,
                     "nickname":"Matejko",
                     "bio:":"Painter… ",
-                    "preffered_style": "Old paintings"
+                    "preferred_style": "Old paintings"
                 },
                 "service":
                 {
@@ -939,7 +993,7 @@ ArtGear - Graphics Task Manager
 + Response 500 (application/json)
 
         {
-            "message": "INTERNAL SERVER ERROR"
+            "error": "Internal Server Error"
         }
 
 ### Create An Order [POST]
@@ -965,9 +1019,9 @@ ArtGear - Graphics Task Manager
                 "client":
                 {
                     "id": 1,
-                    "fullname": "Jan Kowalski",
+                    "full_name": "Jan Kowalski",
                     "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
+                    "phone": "587458625",
                     "age" : 18
                 },
                 "artist":
@@ -975,7 +1029,7 @@ ArtGear - Graphics Task Manager
                     "id": 1,
                     "nickname":"Matejko",
                     "bio:":"Painter… ",
-                    "preffered_style": "Old paintings"
+                    "preferred_style": "Old paintings"
                 },
                 "service":
                 {
@@ -991,10 +1045,10 @@ ArtGear - Graphics Task Manager
                 "notes": "Contact via email"
             }
             
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
 
 ## An Order [/orders/{id}]
@@ -1016,9 +1070,9 @@ ArtGear - Graphics Task Manager
                 "client":
                 {
                     "id": 1,
-                    "fullname": "Jan Kowalski",
+                    "full_name": "Jan Kowalski",
                     "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
+                    "phone": "587458625",
                     "age" : 18
                 },
                 "artist":
@@ -1026,7 +1080,7 @@ ArtGear - Graphics Task Manager
                     "id": 1,
                     "nickname":"Matejko",
                     "bio:":"Painter… ",
-                    "preffered_style": "Old paintings"
+                    "preferred_style": "Old paintings"
                 },
                 "service":
                 {
@@ -1045,7 +1099,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Order with 'id'=1"
         }
         
 ### Delete An Order [DELETE]
@@ -1067,7 +1121,7 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Order with 'id'=1"
         }
         
 ### Update An Order Status [PATCH]
@@ -1094,9 +1148,9 @@ ArtGear - Graphics Task Manager
                 "client":
                 {
                     "id": 1,
-                    "fullname": "Jan Kowalski",
+                    "full_name": "Jan Kowalski",
                     "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
+                    "phone": "587458625",
                     "age" : 18
                 },
                 "artist":
@@ -1104,7 +1158,7 @@ ArtGear - Graphics Task Manager
                     "id": 1,
                     "nickname":"Matejko",
                     "bio:":"Painter… ",
-                    "preffered_style": "Old paintings"
+                    "preferred_style": "Old paintings"
                 },
                 "service":
                 {
@@ -1123,104 +1177,13 @@ ArtGear - Graphics Task Manager
 + Response 404 (application/json)
 
         {
-            "message": "NOT FOUND"
+            "error": "Couldn't find Order with 'id'=1"
         }
 
-+ Response 400 (application/json)
++ Response 422 (application/json)
 
         {
-            "message": "BAD REQUEST"
+            "error": "Unprocessable Entity"
         }
 
-## User's Orders [/orders/{user_id}]
-
-### List User's Orders [GET]
-
-+ Request
-    + Headers
-    
-            Accept: application/json
-            
-+ Parameters
-    + user_id: 1 (integer) - ID of an user
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "id": 1,
-                "artist":
-                {
-                    "id": 1,
-                    "nickname":"Matejko",
-                    "bio:":"Painter… ",
-                    "preffered_style": "Old paintings"
-                },
-                "service":
-                {
-                    "id": 1,
-                    "name":"Matejko",
-                    "category:":
-                    {
-                        "id": 1,
-                        "name": "Logo"
-                    }
-                },
-                "order_status": "CREATED",
-                "notes": "Contact via email"
-            }
-        ]
-        
-+ Response 404 (application/json)
-
-        {
-            "message": "NOT FOUND"
-        }
-        
-## Artist's Orders [/orders/{artist_id}]
-
-### List Artist's Orders [GET]
-
-+ Request
-    + Headers
-    
-            Accept: application/json
-            
-+ Parameters
-    + artist_id: 1 (integer) - ID of an artist
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "id": 1,
-                "client":
-                {
-                    "id": 1,
-                    "fullname": "Jan Kowalski",
-                    "email": "jan.kowalski@gmail.com" ,
-                    "phone_number": "587458625",
-                    "age" : 18
-                },
-                "service":
-                {
-                    "id": 1,
-                    "name":"Matejko",
-                    "category:":
-                    {
-                        "id": 1,
-                        "name": "Logo"
-                    }
-                },
-                "order_status": "CREATED",
-                "notes": "Contact via email"
-            }
-        ]
-        
-+ Response 404 (application/json)
-
-        {
-            "message": "NOT FOUND"
-        }
-        
 <!-- ORDERS END -->
